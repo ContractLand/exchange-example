@@ -109,106 +109,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "name": "id",
-        "type": "uint64"
-      }
-    ],
-    "name": "NewCancelOrder",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "baseToken",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "tradeToken",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "NewBestAsk",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "baseToken",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "tradeToken",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "NewAsk",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "baseToken",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "tradeToken",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "NewBid",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "baseToken",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "tradeToken",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "NewBestBid",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "name": "baseToken",
         "type": "address"
@@ -230,7 +130,7 @@
       },
       {
         "indexed": false,
-        "name": "sell",
+        "name": "isSell",
         "type": "bool"
       },
       {
@@ -277,7 +177,17 @@
       },
       {
         "indexed": false,
-        "name": "side",
+        "name": "bidOwner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "askOwner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "isSell",
         "type": "bool"
       },
       {
@@ -297,6 +207,53 @@
       }
     ],
     "name": "NewTrade",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "baseToken",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "id",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "name": "isSell",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "timestamp",
+        "type": "uint64"
+      }
+    ],
+    "name": "NewCancelOrder",
     "type": "event"
   },
   {
@@ -361,7 +318,7 @@
         "type": "address"
       },
       {
-        "name": "owner",
+        "name": "orderOwner",
         "type": "address"
       },
       {
@@ -396,7 +353,7 @@
         "type": "address"
       },
       {
-        "name": "owner",
+        "name": "orderOwner",
         "type": "address"
       },
       {
@@ -437,6 +394,53 @@
     "constant": true,
     "inputs": [
       {
+        "name": "id",
+        "type": "uint64"
+      }
+    ],
+    "name": "getOrder",
+    "outputs": [
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
+        "type": "address"
+      },
+      {
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "name": "originalAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "isSell",
+        "type": "bool"
+      },
+      {
+        "name": "timestamp",
+        "type": "uint64"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
         "name": "baseToken",
         "type": "address"
       },
@@ -448,93 +452,11 @@
     "name": "getOrderBookInfo",
     "outputs": [
       {
-        "name": "firstOrder",
-        "type": "uint64"
-      },
-      {
-        "name": "bestBid",
-        "type": "uint64"
-      },
-      {
         "name": "bestAsk",
         "type": "uint64"
       },
       {
-        "name": "lastOrder",
-        "type": "uint64"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "id",
-        "type": "uint64"
-      }
-    ],
-    "name": "getOrder",
-    "outputs": [
-      {
-        "name": "price",
-        "type": "uint256"
-      },
-      {
-        "name": "isSell",
-        "type": "bool"
-      },
-      {
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "name": "next",
-        "type": "uint64"
-      },
-      {
-        "name": "prev",
-        "type": "uint64"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "baseToken",
-        "type": "address"
-      },
-      {
-        "name": "tradeToken",
-        "type": "address"
-      }
-    ],
-    "name": "getOrderbookBids",
-    "outputs": [
-      {
-        "name": "price",
-        "type": "uint256[20]"
-      },
-      {
-        "name": "isSell",
-        "type": "bool[20]"
-      },
-      {
-        "name": "amount",
-        "type": "uint256[20]"
-      },
-      {
-        "name": "id",
-        "type": "uint256[20]"
-      },
-      {
-        "name": "items",
+        "name": "bestBid",
         "type": "uint64"
       }
     ],
@@ -557,24 +479,125 @@
     "name": "getOrderbookAsks",
     "outputs": [
       {
-        "name": "price",
+        "name": "prices",
         "type": "uint256[20]"
       },
       {
-        "name": "isSell",
-        "type": "bool[20]"
+        "name": "amounts",
+        "type": "uint256[20]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "baseToken",
+        "type": "address"
       },
       {
-        "name": "amount",
+        "name": "tradeToken",
+        "type": "address"
+      }
+    ],
+    "name": "getOrderbookBids",
+    "outputs": [
+      {
+        "name": "prices",
         "type": "uint256[20]"
       },
       {
-        "name": "id",
+        "name": "amounts",
         "type": "uint256[20]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "baseToken",
+        "type": "address"
       },
       {
-        "name": "items",
-        "type": "uint64"
+        "name": "tradeToken",
+        "type": "address"
+      }
+    ],
+    "name": "getAsks",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64[]"
+      },
+      {
+        "name": "",
+        "type": "address[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint64[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "baseToken",
+        "type": "address"
+      },
+      {
+        "name": "tradeToken",
+        "type": "address"
+      }
+    ],
+    "name": "getBids",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64[]"
+      },
+      {
+        "name": "",
+        "type": "address[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint64[]"
       }
     ],
     "payable": false,
