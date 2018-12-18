@@ -11,6 +11,7 @@ const {
   USER_ADDRESS_PRIVATE_KEY,
   EXCHANGE_ADDRESS,
   RPC_URL,
+  ETH_TOKEN_ADDRESS,
   GAS_PRICE
 } = process.env
 
@@ -19,7 +20,7 @@ const web3Instance = new Web3(web3Provider)
 
 const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 
-const BASE_TOKEN = '0xbF52fc7861856c8A32f4C05463b5F468728D2470'
+const BASE_TOKEN = ETH_TOKEN_ADDRESS
 const TRADE_TOKEN = '0x0000000000000000000000000000000000000000'
 
 async function main() {
