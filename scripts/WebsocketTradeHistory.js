@@ -2,7 +2,6 @@ require('dotenv').config()
 const Web3 = require('web3')
 const Web3Utils = require('web3-utils')
 const assert = require('assert');
-const { sendTx, sendRawTx, getReceipt } = require('../helper/sendTx')
 
 const Exchange = require('../abis/Exchange.abi')
 
