@@ -24,19 +24,6 @@ const BASE_TOKEN = ETH_TOKEN_ADDRESS
 const TRADE_TOKEN = '0x0000000000000000000000000000000000000000'
 
 async function main() {
-  const chainId = await sendRawTx({
-    url: RPC_URL,
-    params: [],
-    method: 'net_version'
-  })
-
-  let nonce = await sendRawTx({
-    url: RPC_URL,
-    method: 'eth_getTransactionCount',
-    params: [USER_ADDRESS, 'latest']
-  })
-  nonce = Web3Utils.hexToNumber(nonce)
-
   try {
     const asks = await exchange.methods.getAsks(BASE_TOKEN, TRADE_TOKEN).call()
     console.log("asks size: ", asks[0].length)
