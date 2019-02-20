@@ -12,7 +12,7 @@
     "dotenv": "^5.0.1",
     "ganache-cli": "^7.0.0-beta.0",
     "node-fetch": "^2.1.2",
-    "web3": "1.0.0-beta.34",
-    "web3-utils": "^1.0.0-beta.34"
+    "web3": "1.0.0-beta.36",
+    "web3-utils": "^1.0.0-beta.36"
   }
 }
