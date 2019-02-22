@@ -48,6 +48,34 @@
   {
     "constant": true,
     "inputs": [],
+    "name": "MAX_TOTAL_SIZE",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint128"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "MIN_PRICE_SIZE",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
     "name": "paused",
     "outputs": [
       {
@@ -85,6 +113,20 @@
       {
         "name": "",
         "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "MIN_AMOUNT_SIZE",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64"
       }
     ],
     "payable": false,
@@ -157,33 +199,28 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "baseToken",
+        "name": "tokenPairHash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "name": "taker",
         "type": "address"
       },
       {
         "indexed": true,
-        "name": "tradeToken",
+        "name": "maker",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "bidId",
+        "name": "takeOrderId",
         "type": "uint64"
       },
       {
         "indexed": false,
-        "name": "askId",
+        "name": "makeOrderId",
         "type": "uint64"
-      },
-      {
-        "indexed": false,
-        "name": "bidOwner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "askOwner",
-        "type": "address"
       },
       {
         "indexed": false,
@@ -476,60 +513,6 @@
         "type": "address"
       }
     ],
-    "name": "getOrderbookAsks",
-    "outputs": [
-      {
-        "name": "prices",
-        "type": "uint256[20]"
-      },
-      {
-        "name": "amounts",
-        "type": "uint256[20]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "baseToken",
-        "type": "address"
-      },
-      {
-        "name": "tradeToken",
-        "type": "address"
-      }
-    ],
-    "name": "getOrderbookBids",
-    "outputs": [
-      {
-        "name": "prices",
-        "type": "uint256[20]"
-      },
-      {
-        "name": "amounts",
-        "type": "uint256[20]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "baseToken",
-        "type": "address"
-      },
-      {
-        "name": "tradeToken",
-        "type": "address"
-      }
-    ],
     "name": "getAsks",
     "outputs": [
       {
@@ -602,6 +585,48 @@
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newMin",
+        "type": "uint64"
+      }
+    ],
+    "name": "setMinPriceSize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newMin",
+        "type": "uint64"
+      }
+    ],
+    "name": "setMinAmountSize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newMax",
+        "type": "uint128"
+      }
+    ],
+    "name": "setMaxTotalSize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]
