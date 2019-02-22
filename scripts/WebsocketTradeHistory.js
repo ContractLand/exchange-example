@@ -22,21 +22,14 @@ const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 const BASE_TOKEN = ETH_TOKEN_ADDRESS
 const TRADE_TOKEN = '0x0000000000000000000000000000000000000000'
 
+// Subscribe to NewTrade event and get notified when trades occur
 async function main() {
   exchange.events.NewTrade({
       filter: {tokenPairHash: getTokenPairHash(BASE_TOKEN, TRADE_TOKEN, Web3Utils)},
-      fromBlock: 0
+      fromBlock: 'latest'
+  }, (error, newTradeEvent) => {
+      console.log(newTradeEvent)
   })
-  .on('data', (event) => {
-      console.log('on new trade:')
-      console.log(event); // Fires on each incoming event with the event object as argument.
-  })
-  .on('changed', (event) => {
-      console.log('on changed:')
-      console.log(event)
-      // Fires on each event which was removed from the blockchain. The event will have the additional property "removed: true".
-  })
-  .on('error', console.error) //Fires when an error in the subscription occours.
 }
 
 function getTokenPairHash(baseTokenAddress, tradeTokenAddress, web3) {
