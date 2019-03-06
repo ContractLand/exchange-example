@@ -21,24 +21,12 @@ const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 
 const BASE_TOKEN = ETH_TOKEN_ADDRESS
 const TRADE_TOKEN = '0x0000000000000000000000000000000000000000'
+const TIME_RANGE = [0, 999999999999999]
+const LIMIT = 1000000
 
 async function main() {
-  exchange.getPastEvents('NewTrade', {
-      // filter: {tokenPairHash: getTokenPairHash(BASE_TOKEN, TRADE_TOKEN, Web3Utils)},
-      fromBlock: 10000,
-      toBlock: 'latest'
-  }, (error, events) => {
-    console.log(events.length)
-    // "0x806ca6b2af028e492e2897661e3a7f1be722f21229eaa53962325b62c2810f53"
-  })
-}
-
-function getTokenPairHash(baseTokenAddress, tradeTokenAddress, web3) {
-    const baseTokenStr = (baseTokenAddress).replace(/^0x/, '')
-    const tradeTokenStr = (tradeTokenAddress).replace(/^0x/, '')
-    const tokenPair = `0x${baseTokenStr}${tradeTokenStr}`
-    const hash = web3.sha3(tokenPair, {encoding: 'hex'})
-    return hash
+  const trades = await exchange.methods.getTrades(BASE_TOKEN, TRADE_TOKEN, TIME_RANGE, LIMIT).call()
+  console.log("trades size: ", trades[0].length)
 }
 
 main()

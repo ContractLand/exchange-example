@@ -15,6 +15,20 @@
   },
   {
     "constant": true,
+    "inputs": [],
+    "name": "MAX_GET_TRADES_SIZE",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [
       {
         "name": "",
@@ -588,6 +602,53 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "baseToken",
+        "type": "address"
+      },
+      {
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "timeRange",
+        "type": "uint64[]"
+      },
+      {
+        "name": "limit",
+        "type": "uint16"
+      }
+    ],
+    "name": "getTrades",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "bool[]"
+      },
+      {
+        "name": "",
+        "type": "uint64[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -624,6 +685,20 @@
       }
     ],
     "name": "setMaxTotalSize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newMax",
+        "type": "uint16"
+      }
+    ],
+    "name": "setMaxGetTradesSize",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
