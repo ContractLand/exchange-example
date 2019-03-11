@@ -25,7 +25,7 @@ const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 
 // *** TEST VARIABLES *** //
 const NUMBER_OF_TX = 1
-const GAS_LIMIT = 600000
+const GAS_LIMIT = 1500000
 const GAS_PRICE = '1'
 const tradeTokenAmount = 1
 const tradePrice = 0.00001

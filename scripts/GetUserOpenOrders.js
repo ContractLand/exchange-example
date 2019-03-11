@@ -24,7 +24,7 @@ const TRADE_TOKEN = '0x0000000000000000000000000000000000000000'
 
 async function main() {
   try {
-    const orders = await exchange.methods.getUserOrders(USER_ADDRESS, TRADE_TOKEN, BASE_TOKEN).call()
+    const orders = await exchange.methods.getUserOpenOrders(USER_ADDRESS, TRADE_TOKEN, BASE_TOKEN).call()
     console.log("orders size: ", orders[0].length)
   } catch (e) {
     console.log(e)
