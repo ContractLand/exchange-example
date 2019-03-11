@@ -25,7 +25,7 @@ const TIME_RANGE = [0, 999999999999999]
 const LIMIT = 1000000
 
 async function main() {
-  const trades = await exchange.methods.getTrades(BASE_TOKEN, TRADE_TOKEN, TIME_RANGE, LIMIT).call()
+  const trades = await exchange.methods.getTradeHistory(LIMIT, TIME_RANGE, TRADE_TOKEN, BASE_TOKEN).call()
   console.log("trades size: ", trades[0].length)
 }
 
