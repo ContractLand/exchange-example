@@ -22,14 +22,15 @@ const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 
 const BASE_TOKEN = ETH_TOKEN_ADDRESS
 const TRADE_TOKEN = '0x0000000000000000000000000000000000000000'
+const LIMIT = 500
 
 async function main() {
   try {
-    const asks = await exchange.methods.getAsks(BASE_TOKEN, TRADE_TOKEN).call()
+    const asks = await exchange.methods.getAsks(LIMIT, TRADE_TOKEN, BASE_TOKEN).call({gas: 600000})
     console.log("asks size: ", asks[0].length)
     // console.log(asks)
 
-    const bids = await exchange.methods.getBids(BASE_TOKEN, TRADE_TOKEN).call()
+    const bids = await exchange.methods.getBids(LIMIT, TRADE_TOKEN, BASE_TOKEN).call({gas: 600000})
     console.log("bids size: ", bids[0].length)
     // console.log(bids)
   } catch (e) {

@@ -15,20 +15,6 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "MAX_GET_TRADES_SIZE",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint16"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [
       {
         "name": "",
@@ -95,6 +81,20 @@
       {
         "name": "",
         "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "MAX_GET_RETURN_SIZE",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint16"
       }
     ],
     "payable": false,
@@ -519,11 +519,15 @@
     "constant": true,
     "inputs": [
       {
-        "name": "baseToken",
-        "type": "address"
+        "name": "limit",
+        "type": "uint16"
       },
       {
         "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
         "type": "address"
       }
     ],
@@ -562,11 +566,15 @@
     "constant": true,
     "inputs": [
       {
-        "name": "baseToken",
-        "type": "address"
+        "name": "limit",
+        "type": "uint16"
       },
       {
         "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
         "type": "address"
       }
     ],
@@ -605,23 +613,23 @@
     "constant": true,
     "inputs": [
       {
-        "name": "baseToken",
-        "type": "address"
-      },
-      {
-        "name": "tradeToken",
-        "type": "address"
+        "name": "limit",
+        "type": "uint16"
       },
       {
         "name": "timeRange",
         "type": "uint64[]"
       },
       {
-        "name": "limit",
-        "type": "uint16"
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
+        "type": "address"
       }
     ],
-    "name": "getTrades",
+    "name": "getTradeHistory",
     "outputs": [
       {
         "name": "",
@@ -638,6 +646,163 @@
       {
         "name": "",
         "type": "bool[]"
+      },
+      {
+        "name": "",
+        "type": "uint64[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "limit",
+        "type": "uint16"
+      },
+      {
+        "name": "timeRange",
+        "type": "uint64[]"
+      },
+      {
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
+        "type": "address"
+      }
+    ],
+    "name": "getUserTradeHistory",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "bool[]"
+      },
+      {
+        "name": "",
+        "type": "uint64[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
+        "type": "address"
+      }
+    ],
+    "name": "getUserOrders",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "bool[]"
+      },
+      {
+        "name": "",
+        "type": "uint64[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "limit",
+        "type": "uint16"
+      },
+      {
+        "name": "timeRange",
+        "type": "uint64[]"
+      },
+      {
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
+        "type": "address"
+      }
+    ],
+    "name": "getUserOrderHistory",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint64[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "bool[]"
+      },
+      {
+        "name": "",
+        "type": "uint64[]"
       },
       {
         "name": "",
@@ -698,7 +863,7 @@
         "type": "uint16"
       }
     ],
-    "name": "setMaxGetTradesSize",
+    "name": "setMaxGetSize",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
