@@ -578,6 +578,37 @@
         "type": "address"
       }
     ],
+    "name": "getAggregatedAsks",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "limit",
+        "type": "uint16"
+      },
+      {
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
+        "type": "address"
+      }
+    ],
     "name": "getBids",
     "outputs": [
       {
@@ -603,6 +634,37 @@
       {
         "name": "",
         "type": "uint64[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "limit",
+        "type": "uint16"
+      },
+      {
+        "name": "tradeToken",
+        "type": "address"
+      },
+      {
+        "name": "baseToken",
+        "type": "address"
+      }
+    ],
+    "name": "getAggregatedBids",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
       }
     ],
     "payable": false,
@@ -723,7 +785,7 @@
         "type": "address"
       }
     ],
-    "name": "getUserOrders",
+    "name": "getUserOpenOrders",
     "outputs": [
       {
         "name": "",
