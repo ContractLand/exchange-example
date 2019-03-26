@@ -10,8 +10,7 @@ const {
   USER_ADDRESS,
   USER_ADDRESS_PRIVATE_KEY,
   EXCHANGE_ADDRESS,
-  RPC_URL,
-  GAS_PRICE
+  RPC_URL
 } = process.env
 
 const web3Provider = new Web3.providers.HttpProvider(RPC_URL)
@@ -47,12 +46,12 @@ async function main() {
       nonce,
       gasPrice: '1',
       amount: '0',
-      gasLimit: 500000,
+      gasLimit: 800000,
       to: EXCHANGE_ADDRESS,
       web3: web3Instance,
       chainId: chainId
     })
-    
+
     const txReceipt = await getReceipt(txHash, RPC_URL)
     if (txReceipt.status == '0x1') {
       console.log('transaction succeeded: ', txHash)

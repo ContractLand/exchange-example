@@ -6,8 +6,6 @@ const assert = require('assert');
 const Exchange = require('../abis/Exchange.abi')
 
 const {
-  USER_ADDRESS,
-  USER_ADDRESS_PRIVATE_KEY,
   EXCHANGE_ADDRESS,
   RPC_URL,
   ETH_TOKEN_ADDRESS,
@@ -22,7 +20,7 @@ const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 const BASE_TOKEN = ETH_TOKEN_ADDRESS
 const TRADE_TOKEN = '0x0000000000000000000000000000000000000000'
 const TIME_RANGE = [0, 999999999999999]
-const LIMIT = 1000000
+const LIMIT = 10000
 
 async function main() {
   const trades = await exchange.methods.getTradeHistory(LIMIT, TIME_RANGE, TRADE_TOKEN, BASE_TOKEN).call()

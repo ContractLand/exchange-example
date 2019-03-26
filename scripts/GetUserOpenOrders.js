@@ -10,8 +10,7 @@ const {
   USER_ADDRESS_PRIVATE_KEY,
   EXCHANGE_ADDRESS,
   RPC_URL,
-  ETH_TOKEN_ADDRESS,
-  GAS_PRICE
+  ETH_TOKEN_ADDRESS
 } = process.env
 
 const web3Provider = new Web3.providers.HttpProvider(RPC_URL)

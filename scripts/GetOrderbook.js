@@ -7,8 +7,6 @@ const { sendTx, sendRawTx, getReceipt } = require('../helper/sendTx')
 const Exchange = require('../abis/Exchange.abi')
 
 const {
-  USER_ADDRESS,
-  USER_ADDRESS_PRIVATE_KEY,
   EXCHANGE_ADDRESS,
   RPC_URL,
   ETH_TOKEN_ADDRESS,
@@ -26,13 +24,11 @@ const LIMIT = 500
 
 async function main() {
   try {
-    const asks = await exchange.methods.getAsks(LIMIT, TRADE_TOKEN, BASE_TOKEN).call({gas: 600000})
+    const asks = await exchange.methods.getAsks(LIMIT, TRADE_TOKEN, BASE_TOKEN)
     console.log("asks size: ", asks[0].length)
-    // console.log(asks)
 
-    const bids = await exchange.methods.getBids(LIMIT, TRADE_TOKEN, BASE_TOKEN).call({gas: 600000})
+    const bids = await exchange.methods.getBids(LIMIT, TRADE_TOKEN, BASE_TOKEN)
     console.log("bids size: ", bids[0].length)
-    // console.log(bids)
   } catch (e) {
     console.log(e)
   }

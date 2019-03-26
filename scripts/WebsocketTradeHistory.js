@@ -6,8 +6,6 @@ const assert = require('assert');
 const Exchange = require('../abis/Exchange.abi')
 
 const {
-  USER_ADDRESS,
-  USER_ADDRESS_PRIVATE_KEY,
   EXCHANGE_ADDRESS,
   WS_URL,
   ETH_TOKEN_ADDRESS,
