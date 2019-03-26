@@ -24,10 +24,10 @@ const LIMIT = 500
 
 async function main() {
   try {
-    const asks = await exchange.methods.getAsks(LIMIT, TRADE_TOKEN, BASE_TOKEN)
+    const asks = await exchange.methods.getAsks(LIMIT, TRADE_TOKEN, BASE_TOKEN).call()
     console.log("asks size: ", asks[0].length)
 
-    const bids = await exchange.methods.getBids(LIMIT, TRADE_TOKEN, BASE_TOKEN)
+    const bids = await exchange.methods.getBids(LIMIT, TRADE_TOKEN, BASE_TOKEN).call()
     console.log("bids size: ", bids[0].length)
   } catch (e) {
     console.log(e)
