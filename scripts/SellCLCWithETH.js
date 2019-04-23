@@ -12,7 +12,8 @@ const {
   USER_ADDRESS_PRIVATE_KEY,
   EXCHANGE_ADDRESS,
   ETH_TOKEN_ADDRESS,
-  RPC_URL
+  RPC_URL,
+  GAS_LIMIT_MARGIN
 } = process.env
 
 const CLC_ADDRESS = '0x0000000000000000000000000000000000000000'
@@ -25,7 +26,6 @@ const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 
 // *** TEST VARIABLES *** //
 const NUMBER_OF_TX = 1
-const GAS_LIMIT = 1500000
 const GAS_PRICE = '1'
 const tradeTokenAmount = 1
 const tradePrice = 0.00001
@@ -47,10 +47,14 @@ async function main() {
   nonce = Web3Utils.hexToNumber(nonce)
 
   let numOfTxSent = 0
-    while (numOfTxSent < NUMBER_OF_TX) {
+  while (numOfTxSent < NUMBER_OF_TX) {
     const sellData = await exchange.methods
         .sell(ETH_TOKEN_ADDRESS, CLC_ADDRESS, USER_ADDRESS, Web3Utils.toWei(tradeTokenAmount.toString()), Web3Utils.toWei(tradePrice.toString()))
         .encodeABI({ from: USER_ADDRESS })
+
+    const estimatedGasLimit = Math.round(await exchange.methods
+        .sell(ETH_TOKEN_ADDRESS, CLC_ADDRESS, USER_ADDRESS, Web3Utils.toWei(tradeTokenAmount.toString()), Web3Utils.toWei(tradePrice.toString()))
+        .estimateGas({ from: USER_ADDRESS }) * GAS_LIMIT_MARGIN)
 
     try {
       const txHash = await sendTx({
@@ -60,7 +64,7 @@ async function main() {
         nonce,
         gasPrice: GAS_PRICE,
         amount: tradeTokenAmount.toString(),
-        gasLimit: GAS_LIMIT,
+        gasLimit: estimatedGasLimit,
         to: EXCHANGE_ADDRESS,
         web3: web3Instance,
         chainId: chainId

@@ -12,7 +12,8 @@ const {
   USER_ADDRESS_PRIVATE_KEY,
   EXCHANGE_ADDRESS,
   ETH_TOKEN_ADDRESS,
-  RPC_URL
+  RPC_URL,
+  GAS_LIMIT_MARGIN
 } = process.env
 
 const CLC_ADDRESS = '0x0000000000000000000000000000000000000000'
@@ -25,7 +26,6 @@ const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 
 // *** TEST VARIABLES *** //
 const NUMBER_OF_TX = 1
-const GAS_LIMIT = 1000000
 const GAS_PRICE = '1'
 const tradeTokenAmount = 1
 const tradePrice = 0.00001
@@ -56,6 +56,10 @@ async function main() {
         .approveAndCall(EXCHANGE_ADDRESS, Web3Utils.toWei(baseTokenAmount.toString()), buyData)
         .encodeABI({ from: USER_ADDRESS })
 
+    const estimatedGasLimit = Math.round(await erc827.methods
+        .approveAndCall(EXCHANGE_ADDRESS, Web3Utils.toWei(baseTokenAmount.toString()), buyData)
+        .estimateGas({ from: USER_ADDRESS }) * GAS_LIMIT_MARGIN)
+
     try {
       const txHash = await sendTx({
         rpcUrl: RPC_URL,
@@ -64,7 +68,7 @@ async function main() {
         nonce,
         gasPrice: GAS_PRICE,
         amount: '0',
-        gasLimit: GAS_LIMIT,
+        gasLimit: estimatedGasLimit,
         to: ETH_TOKEN_ADDRESS,
         web3: web3Instance,
         chainId: chainId
