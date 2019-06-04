@@ -6,10 +6,10 @@ const assert = require('assert');
 const ERC20 = require('../abis/ERC20.abi')
 
 const PROCESS_TIMEOUT_INTERVAL = 2000 // 2s
-const WS_URL = 'mainnet.infura.io/v3/2e39094c865b4cdb90e122214b57ad04'
-// const WS_URL = 'ropsten.infura.io/v3/2e39094c865b4cdb90e122214b57ad04'
+const RPC_URL = 'https://mainnet.infura.io/v3/2e39094c865b4cdb90e122214b57ad04'
+// const RPC_URL = 'https://ropsten.infura.io/v3/2e39094c865b4cdb90e122214b57ad04'
 
-const web3Provider = new Web3.providers.WebsocketProvider(WS_URL)
+const web3Provider = new Web3.providers.HttpProvider(RPC_URL)
 const web3Instance = new Web3(web3Provider)
 
 const TOKEN_ADDRESS = '0x...'
