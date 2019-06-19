@@ -24,15 +24,24 @@ const LIMIT = 500
 
 async function main() {
   try {
-    const asks = await exchange.methods.getAsks(LIMIT, TRADE_TOKEN, BASE_TOKEN).call()
+    const asks = await exchange.methods.getAggregatedAsks(LIMIT, TRADE_TOKEN, BASE_TOKEN).call()
     console.log("asks size: ", asks[0].length)
+    printOrder(asks)
 
-    const bids = await exchange.methods.getBids(LIMIT, TRADE_TOKEN, BASE_TOKEN).call()
+    const bids = await exchange.methods.getAggregatedBids(LIMIT, TRADE_TOKEN, BASE_TOKEN).call()
     console.log("bids size: ", bids[0].length)
+    printOrder(bids)
   } catch (e) {
     console.log(e)
   }
+}
 
+function printOrder(orders) {
+    console.log('price, amount')
+    for (let i=0; i<orders[0].length; i++) {
+      // print price and amount
+      console.log(Web3Utils.fromWei(orders[0][i], 'ether'), ', ', Web3Utils.fromWei(orders[1][i], 'ether'))
+    }
 }
 
 main()

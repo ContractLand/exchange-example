@@ -38,7 +38,7 @@ async function main() {
   const currentMax = await exchange.methods
       .MAX_GET_RETURN_SIZE().call()
 
-  console.log(currentMax)
+  console.log("Current Max is: ", currentMax)
 
   const setMaxData = await exchange.methods
       .setMaxGetSize(newMax)
@@ -50,7 +50,7 @@ async function main() {
       privateKey: USER_ADDRESS_PRIVATE_KEY,
       data: setMaxData,
       nonce,
-      gasPrice: '2',
+      gasPrice: '1',
       amount: '0',
       gasLimit: 1000000,
       to: EXCHANGE_ADDRESS,
@@ -61,6 +61,7 @@ async function main() {
     const txReceipt = await getReceipt(txHash, RPC_URL)
     if (txReceipt.status == '0x1') {
       console.log('transaction succeeded: ', txHash)
+      console.log("New Max is: ", newMax)
     }
   } catch (e) {
     console.log(e)
