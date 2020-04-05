@@ -18,7 +18,10 @@ const web3Instance = new Web3(web3Provider)
 
 const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 
-const whiteListAddress = '0x000...'
+// - Set the following variables to the desired values
+//   - whiteListAddress: Address of user to whitelist token fee
+
+const whiteListAddress = '0x0000000000000000000000000000000000000000'
 
 async function main() {
   const chainId = await sendRawTx({

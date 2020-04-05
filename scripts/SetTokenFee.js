@@ -18,8 +18,12 @@ const web3Instance = new Web3(web3Provider)
 
 const exchange = new web3Instance.eth.Contract(Exchange, EXCHANGE_ADDRESS)
 
+// - Set the following variables to the desired values
+//   - tokenAddress: Address of token to set fee for
+//   - feeNumerator/feeDenominator: numerator and denominator for fee. For example, for a 0.3% fee, set numerator as 3 and denominator as 1000
+
 const tokenAddress = '0x0000000000000000000000000000000000000000'
-const feeNumerator = 2
+const feeNumerator = 3
 const feeDenominator = 1000
 
 async function main() {
