@@ -21,6 +21,8 @@ const BASE_TOKEN = '0xEb41C988fC445cbA576359B9e9d62A5c76D2BA66' // USDT
 const TRADE_TOKEN = '0x58864a85B1F8aE5B370f2AA4177988e2BBb0B88B' // UTOPIA
 
 const todayTimestamp = Math.round(new Date() / 1000)
+const yesterdayTimestamp = Math.round(new Date(new Date().setDate(new Date().getDate() - 1)) / 1000)
+const DAY_TIME_RANGE = [yesterdayTimestamp, todayTimestamp]
 const lastWeekTimestamp = Math.round(new Date(new Date().setDate(new Date().getDate() - 7)) / 1000)
 const WEEK_TIME_RANGE = [lastWeekTimestamp, todayTimestamp]
 const TOTAL_TIME_RANGE = [0, 999999999999999]
@@ -28,8 +30,22 @@ const LIMIT = 1000000
 
 async function main() {
   try {
-    const weeklyTrades = await exchange.methods.getTradeHistory(LIMIT, WEEK_TIME_RANGE, TRADE_TOKEN, BASE_TOKEN).call()
+    const dailyTrades = await exchange.methods.getTradeHistory(LIMIT, DAY_TIME_RANGE, TRADE_TOKEN, BASE_TOKEN).call()
+    let DailyUSDTTradeVolume = 0;
+    let DailyUPCTradeVolume = 0;
+    for (let i=0; i<dailyTrades[0].length; i++) {
+      DailyUSDTTradeVolume += Number(Web3Utils.fromWei(dailyTrades[2][i]))
+      let usdtAmount = Web3Utils.fromWei(dailyTrades[1][i]) * Web3Utils.fromWei(dailyTrades[2][i]) // price * amount
+      DailyUPCTradeVolume += usdtAmount
+    }
+    console.log('\n========================================')
+    console.log('Trading Volume of Past Day')
+    console.log('========================================')
+    console.log("Trades: ", dailyTrades[0].length)
+    console.log("USDT Volume: ", DailyUPCTradeVolume)
+    console.log("Utopia Volume: ", DailyUSDTTradeVolume)
 
+    const weeklyTrades = await exchange.methods.getTradeHistory(LIMIT, WEEK_TIME_RANGE, TRADE_TOKEN, BASE_TOKEN).call()
     let WeeklyUSDTTradeVolume = 0;
     let WeeklyUPCTradeVolume = 0;
     for (let i=0; i<weeklyTrades[0].length; i++) {
